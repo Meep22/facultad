@@ -1,0 +1,50 @@
+ORG 1000h
+string db "contar1#!"
+f db 00h
+
+ORG 3000h
+ES_VOCAL: mov DL,0 
+cmp AL, 'a'
+jz TRUE
+cmp AL, 'e'
+jz TRUE
+cmp AL, 'i'
+jz TRUE
+cmp AL, 'o'
+jz TRUE
+cmp AL, 'u'
+jz TRUE
+
+cmp AL, 'A'
+jz TRUE
+cmp AL, 'E'
+jz TRUE
+cmp AL, 'I'
+jz TRUE
+cmp AL, 'O'
+jz TRUE
+cmp AL, 'U'
+jnz NOT_VOCAL
+
+TRUE: mov DL, 11111111b
+NOT_VOCAL: ret
+
+CONTAR_VOC: mov AL, [BX]
+cmp AL, 0
+jz FINAL
+call ES_VOCAL
+cmp DL, 11111111b
+jnz NO_ES
+
+inc DH
+NO_ES: inc BX
+jmp CONTAR_VOC
+FINAL: ret
+
+
+ORG 2000h
+mov BX, offset string
+mov AH, 0
+call CONTAR_VOC
+HLT
+END

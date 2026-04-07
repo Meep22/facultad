@@ -1,0 +1,36 @@
+org 1000h
+str db "abbcde!"
+f db 0h
+bus db "b"
+
+org 3000h
+CONTAR_CAR: mov bx, sp
+add bx, 2
+mov al, [bx]
+add bx, 2
+mov bx,[bx]
+mov dx, 0h
+loop: mov ah, [bx]
+    cmp ah, 0h
+    jz FIN
+    cmp ah, al
+    jz SUM
+    inc bx
+    jmp loop
+
+SUM: inc dl
+    inc bx
+    jmp loop
+
+FIN: ret
+
+org 2000h
+mov bx, offset str
+push bx
+mov bx, offset bus
+mov ax, [bx]
+push ax
+call CONTAR_CAR
+pop ax
+hlt
+end

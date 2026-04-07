@@ -1,0 +1,32 @@
+org 1000h
+vector dw 15,12,-4,5,0
+long dw 5
+org 3000h
+SUMAR_PILA: mov bx, sp
+    add bx, 2
+    mov cx, [bx]
+    mov dx, 0
+    loop3: add bx, 2
+        mov ax, [bx]
+        add dx, ax
+        dec cx
+        jnz loop3
+        ret
+
+org 2000h
+mov cx, long
+mov bx, offset vector
+loop:mov ax, [bx]
+    push ax
+    add bx, 2
+    dec cx
+    jnz loop
+mov cx, long
+push cx
+call SUMAR_PILA
+pop cx
+loop2:pop ax
+    dec cx
+    jnz loop2
+hlt
+end

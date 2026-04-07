@@ -1,0 +1,24 @@
+ORG 1000h
+string db "'aBcDE1#!"
+f db 00h
+
+ORG 3000h
+CONTAR_MIN: mov AL, [BX]
+cmp AL, 'a'
+js NOT_MIN
+cmp AL, 'z'
+jns NOT_MIN
+inc AH
+NOT_MIN: cmp AL, 00h
+jz FIN
+inc BX
+jmp CONTAR_MIN
+FIN: ret
+
+
+ORG 2000h
+mov AX,0
+mov BX, offset string
+call CONTAR_MIN
+HLT
+END

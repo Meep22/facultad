@@ -1,0 +1,29 @@
+org 1000h
+dat1 dw 11111111_11111111b
+dat2 dw 00000000_00000000b
+
+org 3000h
+SWAP: mov bx, sp
+    add bx, 2
+    mov ax, [bx]
+    add bx, 2
+    mov cx, [bx]
+    mov bx, ax
+    mov dx, [bx]
+    mov bx, cx
+    mov cx, [bx]
+    mov [bx], dx
+    mov bx, ax
+    mov [bx], cx
+    ret
+
+org 2000h
+mov ax, offset dat1
+push ax
+mov ax, offset dat2
+push ax
+call SWAP
+pop ax
+pop ax
+hlt
+end

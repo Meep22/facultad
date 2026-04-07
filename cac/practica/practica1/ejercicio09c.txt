@@ -1,0 +1,26 @@
+org 1000h
+num db 10010100b
+cant db 6
+org 3000h
+ROTARIZQ: mov bx, offset num
+    mov ah, [bx]
+    add ah, ah
+    adc ah, 0
+    mov [bx], ah
+    ret
+
+ROTARDER_N: mov al, 8
+    sub al, cl
+    loop: cmp al, 0
+        jz FIN
+        call ROTARIZQ
+        dec al
+        jmp loop
+FIN: ret
+
+org 2000h
+mov bx, offset cant
+mov cl, [bx]
+call ROTARDER_N
+hlt
+end

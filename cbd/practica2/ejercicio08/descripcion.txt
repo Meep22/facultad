@@ -1,0 +1,15 @@
+1 Palermo
+Zona Norte
+200.50
+10 Recoleta
+Zona Centro
+80.00
+30 Zona 3
+Descripcion de la zona 3
+300.00
+40 Zona 4
+Descripcion de la zona 4
+400.00
+50 Zona 5
+Descripcion de la zona 5
+500.00

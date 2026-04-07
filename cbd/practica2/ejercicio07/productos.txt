@@ -1,0 +1,9 @@
+1 CocaCola
+Bebida de 1.5L
+1500.50 100 10
+2 Alfajor
+Alfajor de chocolate
+800.00 50 5
+5 Yerba
+Yerba Mate 1kg
+4000.00 20 2

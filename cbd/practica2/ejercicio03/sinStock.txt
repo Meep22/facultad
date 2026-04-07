@@ -1,0 +1,3 @@
+Codigo: 100 Talle: 40
+Codigo: 200 Talle: 42
+Codigo: 300 Talle: 38

@@ -1,0 +1,20 @@
+ORG 1000h
+string db "asdf"
+fin db 00h
+long dw 0
+
+
+ORG 3000h
+LONGITUD: mov AL, [BX]
+mov AH, 0
+cmp AL, 00h
+jz FIN
+inc BX
+inc AH
+jmp LONGITUD
+FIN: HLT
+
+ORG 2000h
+mov BX, offset string
+call LONGITUD
+END

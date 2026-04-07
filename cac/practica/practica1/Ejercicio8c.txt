@@ -1,0 +1,37 @@
+ORG 1000h
+string db "'aBcDE1#!"
+f db 00h
+
+ORG 3000h
+ES_VOCAL: mov DL,0 
+cmp AL, 'a'
+jz TRUE
+cmp AL, 'e'
+jz TRUE
+cmp AL, 'i'
+jz TRUE
+cmp AL, 'o'
+jz TRUE
+cmp AL, 'u'
+jz TRUE
+
+cmp AL, 'A'
+jz TRUE
+cmp AL, 'E'
+jz TRUE
+cmp AL, 'I'
+jz TRUE
+cmp AL, 'O'
+jz TRUE
+cmp AL, 'U'
+jnz NOT_VOCAL
+
+TRUE: mov DL, 11111111b
+NOT_VOCAL: ret
+
+
+ORG 2000h
+mov AL, 'a'
+call ES_VOCAL
+HLT
+END

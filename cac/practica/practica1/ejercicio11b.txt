@@ -1,0 +1,30 @@
+org 3000h
+DIV:cmp  cl, ch
+    js FIN
+    sub cl, ch
+    inc dl
+    jmp DIV
+
+FIN:ret
+
+MUL:cmp dl,0
+    jz FIN_MUL
+    add dh, ch
+    dec dl
+    jmp MUL
+FIN_MUL: ret
+
+RESTO: mov cx, ax
+call DIV
+mov ch, ah
+call MUL
+sub al, dh
+ret
+
+org 2000h
+mov al, 25
+mov ah, 5
+mov dx, 0
+call RESTO
+hlt
+end

@@ -1,0 +1,24 @@
+org 1000h
+num db 10010100b
+cant db 2
+org 3000h
+ROTARIZQ: mov bx, offset num
+    mov ah, [bx]
+    add ah, ah
+    adc ah, 0
+    mov [bx], ah
+    ret
+
+ROTARIZQ_N:cmp al, 0
+    jz FIN
+    call ROTARIZQ
+    dec al
+    jmp ROTARIZQ_N
+FIN: ret
+
+org 2000h
+mov bx, offset cant
+mov al, [bx]
+call ROTARIZQ_N
+hlt
+end

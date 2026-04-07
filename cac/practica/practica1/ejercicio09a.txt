@@ -1,0 +1,17 @@
+org 1000h
+num db 10000010b
+
+org 3000h
+ROTARIZQ: add ah, ah
+    adc ah, 0
+    mov bx, offset num
+    mov [bx], ah
+    ret
+
+org 2000h
+mov bx, offset num
+mov ah, [bx]
+add al, 1
+call ROTARIZQ
+hlt
+end

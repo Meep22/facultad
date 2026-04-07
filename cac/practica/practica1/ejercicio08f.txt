@@ -1,0 +1,43 @@
+org 1000h
+str db "Hola buen dia"
+f db 0h
+ori db "a"
+re db "o"
+
+org 3000h
+REEMPLAZAR_CAR: mov bx, sp
+    add bx, 2
+    add bx, 2
+    mov al, [bx] ;original
+    inc bx
+    mov ah, [bx] ;reemplazo
+    inc bx
+    mov bx, [bx]
+    loop: mov cl, [bx] ;primer letra del string
+        cmp cl, al
+        jz MOD
+        cmp cl, 0h
+        jz FIN
+        inc bx
+        jmp loop
+
+    MOD: mov [bx], ah
+         inc bx
+         jmp loop
+    FIN: ret
+
+org 2000h
+mov ax, offset str
+push ax
+mov bx, offset ori
+mov ax, [bx]
+push ax
+mov bx, offset re
+mov ax, [bx]
+push ax
+call REEMPLAZAR_CAR
+pop ax
+pop ax
+pop ax
+hlt
+end

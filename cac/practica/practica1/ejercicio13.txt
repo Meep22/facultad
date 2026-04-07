@@ -1,0 +1,16 @@
+org 3000h
+SN: cmp cx, 0
+    jz fin
+    add dx, ax
+    inc ax
+    dec cx
+    call SN
+fin: ret
+
+org 2000h
+mov cx, 3
+mov ax, 1
+mov dx, 0
+call SN
+hlt
+end

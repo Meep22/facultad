@@ -84,18 +84,18 @@ end;
 
 procedure altaListaInvertida(var f: fProducto; reg: rProducto);
 var
-    sig: rProducto;
+    cabecera: rProducto;
     pos: Integer;
 begin
     reset(f);
-    if (not eof(f)) then read(f, sig);
-    if (sig.stock = 0) then seek(f, filesize(f))
+    if (not eof(f)) then read(f, cabecera);
+    if (cabecera.stock = 0) then seek(f, filesize(f))
     else begin
-        pos:= sig.stock;
+        pos:= cabecera.stock;
         seek(f, pos);
-        read(f, sig);
+        read(f, cabecera);
         seek(f, 0);
-        write(f, sig);
+        write(f, cabecera);
         seek(f, pos);
     end;
     write(f, reg);

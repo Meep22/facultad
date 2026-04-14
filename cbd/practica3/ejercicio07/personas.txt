@@ -1,0 +1,15 @@
+123 Juan
+Perez
+1500.50
+234 Maria
+Gomez
+2100.00
+345 Carlos
+Rodriguez
+1850.75
+456 Ana
+Martinez
+3200.40
+567 Lucas
+Santi
+1200.00

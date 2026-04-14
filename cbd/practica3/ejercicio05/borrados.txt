@@ -1,0 +1,9 @@
+10 Remera Algodon V
+Azul
+42 50 1500.50
+30 Camisa Formal Lino
+Blanco
+40 20 3200.75
+60 Saco de Lana
+Gris
+48 10 8500.00

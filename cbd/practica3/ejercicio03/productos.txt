@@ -1,0 +1,24 @@
+101 Teclado Mecánico RGB
+Interruptores red, retroiluminado, español.
+45
+102 Mouse Gamer Pro
+Sensor óptico 16000 DPI, 6 botones.
+30
+103 Monitor 27 Pulgadas
+Panel IPS, 144Hz, resolución 2K.
+15
+104 Auriculares Inalámbricos
+Cancelación de ruido activa, batería 40h.
+22
+105 Disco Sólido 1TB
+NVMe PCIe Gen4, velocidad 5000MB/s.
+10
+106 Memoria RAM 16GB
+DDR4 3200MHz, disipador de aluminio.
+55
+107 Fuente de Poder 750W
+80 Plus Gold, totalmente modular.
+12
+108 Gabinete Mid Tower
+Vidrio templado, 3 ventiladores ARGB.
+8

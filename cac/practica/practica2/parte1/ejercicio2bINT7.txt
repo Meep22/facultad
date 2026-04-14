@@ -1,0 +1,28 @@
+CA EQU 32h
+PA EQU 30h
+ORG 1000h
+msj_on db  "Llave prendida"
+msj_off db "Llave apagada"
+
+ORG 2000H
+mov al, 10000000b
+OUT CA, AL
+IN AL, PA
+AND AL, 10000000b
+JZ apagadas
+MOV AL, 0FFh
+MOV BX , offset msj_on
+MOV AL, 15
+OUT CA, AL
+INT 7
+JMP fin
+apagadas: MOV AL, 0FFh
+OUT CA,AL
+MOV AL, 0FFh
+MOV BX , offset msj_off
+MOV AL, 14
+OUT CA, AL
+INT 7
+fin: INT 0
+end
+

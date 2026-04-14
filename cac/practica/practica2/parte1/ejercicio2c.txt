@@ -1,0 +1,15 @@
+PA EQU 30h
+CA EQU 32h
+PB EQU 31h
+CB EQU 33h
+
+ORG 2000h
+MOV AL, 0FFh
+OUT CA, AL
+MOV AL, 0
+OUT CB, AL
+
+poll: IN AL, PA
+OUT PB, AL
+jmp poll
+end

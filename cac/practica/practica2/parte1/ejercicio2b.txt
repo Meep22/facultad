@@ -1,0 +1,55 @@
+;No funciona idealmente, no tengo llaves cuando tengo la impresora
+PA EQU 30h
+CA EQU 32h
+PB EQU 31h
+CB EQU 33h
+
+ORG 1000h
+msg_on db "Llave prendida"
+fin1 db ?
+msg_off db "Llave apagada"
+fin2 db ?
+
+ORG 1500h
+config: MOV AL, 0FDh
+OUT CA, AL
+MOV AL, 0
+OUT CB, AL
+IN AL, PA
+AND AL, 0FDH
+OUT PA, AL
+ret
+
+ORG 2000h
+MOV AL, 080H
+OUT CA, AL
+IN AL, PA
+AND AL, 080H
+JZ APAGADA
+CALL CONFIG
+MOV BX, OFFSET msg_on
+MOV CL, OFFSET msg_on - OFFSET fin1
+;MOV CL, 14
+JMP POLL2
+APAGADA: call config
+MOV BX, OFFSET msg_off
+MOV CL, OFFSET msg_off - OFFSET fin2
+;MOV CL, 15
+POLL2: IN AL, PA
+AND AL, 1
+JNZ POLL2
+
+MOV AL, [BX]
+OUT PB, AL
+IN AL, PA
+OR AL, 02H
+OUT PA, AL
+IN AL, PA
+AND AL, 0FDH
+OUT PA, AL
+INC BX
+DEC CL
+JNZ POLL2
+INT 0
+END
+

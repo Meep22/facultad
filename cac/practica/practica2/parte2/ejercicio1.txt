@@ -1,0 +1,9 @@
+a)  La linea de data y de strobe son de salida.
+    La linea de busy es de entrada (indica si la impresora esta en condiciones de imprimir un caracter)
+
+b)  El caracter 'h' no se imprime porque el strobe pasa de 1 a 0
+    la 'l' no se imprime porque la impresora esta en estado busy.
+
+c)  En caso de no tener la linea 'strobe' la impresora no sabe que el caracter que ya imprimio cambio,
+    simplemete imprime una sola 'a'
+

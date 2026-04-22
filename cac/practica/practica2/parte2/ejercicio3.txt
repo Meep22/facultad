@@ -1,0 +1,17 @@
+dato EQU 40h
+estado EQU 41h
+
+ORG 3000h
+
+flanco_ascendente: in al, estado
+and al, 11111101b
+out estado, al
+in al, estado
+or al,  00000010b
+out estado, al
+ret
+
+ORG 2000h
+call flanco_ascendente
+int 0
+end

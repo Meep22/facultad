@@ -1,0 +1,39 @@
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 1000h
+letra db "a"
+
+ORG 3000H
+ini_pio: MOV AL, 1
+OUT CA, AL
+MOV AL, 0
+OUT CB, AL
+ret
+
+poll: IN AL, PA
+AND AL, 1
+jnz poll
+ret
+
+flanco_ascendente: in al, PA
+and al, 11111101b
+out PA, al
+in al, PA
+or al,  00000010b
+out PA, al
+ret
+
+imprimir_caracter: OUT PB, AL
+call poll
+call flanco_ascendente
+RET
+
+ORG 2000h
+CALL ini_pio
+MOV AL, letra
+call imprimir_caracter
+int 0
+end

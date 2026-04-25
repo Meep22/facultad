@@ -1,0 +1,45 @@
+PA EQU 30H
+PB EQU 31H
+CA EQU 32H
+CB EQU 33H
+
+ORG 1000H
+MENSAJE db "ORGANIZACION Y ARQUITECTURA DE COMPUTADORAS"
+FIN db 0
+
+ORG 3000H
+ini_pio: MOV AL, 1
+OUT CA, AL
+MOV AL, 0
+OUT CB, AL
+RET
+
+poll: IN AL, PA
+AND AL, 1
+JNZ POLL
+RET
+
+flanco_ascendente: IN AL, PA
+AND AL, 11111101B
+OUT PA, AL
+IN AL, PA
+OR AL,  00000010B
+OUT PA, AL
+RET
+
+imprimir_caracter: MOV AL, [BX]
+OUT PB, AL
+CALL poll
+CALL flanco_ascendente
+INC BX
+DEC AH
+JNZ imprimir_caracter
+RET
+
+ORG 2000H
+MOV BX, offset MENSAJE
+MOV AH, offset FIN - offset MENSAJE
+CALL ini_pio
+CALL imprimir_caracter
+INT 0
+END

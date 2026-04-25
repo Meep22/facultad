@@ -1,0 +1,39 @@
+PIO EQU 30h
+
+ORG 3000h
+init: MOV AL, 0
+OUT PIO + 3, AL
+MOV AL, 00001111b
+MOV CL, 0
+MOV AH, 7
+RET
+
+rotar_iz: ADD AL, AL
+ADC AL, 0
+RET
+
+rotar_de: CALL rotar_iz
+DEC AH
+JNZ rotar_de
+MOV AH, 7
+RET
+
+luces: OUT PIO + 1, AL
+CALL rotar_iz
+INC CL
+CMP CL, 8
+JNZ luces
+der: CALL rotar_de
+OUT PIO + 1, AL
+DEC CL
+CMP CL, 0
+JNZ der
+JMP luces
+RET
+
+ORG 2000h
+CALL init
+CALL luces
+INT 0
+end
+

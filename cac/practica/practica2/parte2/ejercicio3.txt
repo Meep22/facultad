@@ -1,17 +1,18 @@
-dato EQU 40h
-estado EQU 41h
+PIO EQU 30h
 
 ORG 3000h
 
-flanco_ascendente: in al, estado
+flanco_ascendente: in al, PIO
 and al, 11111101b
-out estado, al
-in al, estado
+out PIO, al
+in al, PIO
 or al,  00000010b
-out estado, al
+out PIO, al
 ret
 
 ORG 2000h
+MOV AL, 00000010b
+OUT PIO + 2
 call flanco_ascendente
 int 0
 end

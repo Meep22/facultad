@@ -1,0 +1,33 @@
+HAND EQU 40h
+org 1000h
+MSG db "INGENIERIA E INFORMATICA"
+FIN db ?
+
+ORG 3000h
+poll: IN AL, HAND + 1
+AND AL, 1
+JNZ poll
+RET
+
+pulso_strobe: IN AL, HAND + 1
+AND AL, 11111101b
+OUT HAND + 1, AL
+IN AL, HAND + 1
+OR AL, 00000010b
+OUT HAND + 1, AL
+RET
+
+imprimir_caracter_hand: CALL poll
+MOV AL, [BX]
+OUT HAND, AL
+INC BX
+DEC AH
+JNZ imprimir_caracter_hand
+RET
+
+ORG 2000h
+MOV BX, offset MSG
+MOV AH, offset FIN - offset MSG
+CALL imprimir_caracter_hand
+INT 0
+end

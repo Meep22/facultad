@@ -1,0 +1,47 @@
+PIO EQU 30h
+
+ORG 1000h
+MENSAJE db ?
+
+ORG 3000h
+ini_pio: MOV AL, 1
+OUT PIO + 2, AL
+MOV AL, 0
+OUT PIO + 3, AL
+RET
+
+poll: IN AL, PIO
+AND AL, 1
+JNZ POLL
+RET
+
+flanco_ascendente: IN AL, PIO
+AND AL, 11111101B
+OUT PIO, AL
+IN AL, PIO
+OR AL,  00000010B
+OUT PIO, AL
+RET
+
+imprimir_caracter: MOV AL, [BX]
+OUT PIO + 1, AL
+CALL poll
+CALL flanco_ascendente
+INC BX
+DEC AH
+JNZ imprimir_caracter
+RET
+
+ORG 2000h
+MOV AH, 0
+MOV BX, offset MENSAJE
+leer: INT 6
+INC BX
+INC AH
+CMP AH, 5
+JNZ leer
+CALL ini_pio
+MOV BX, offset MENSAJE
+CALL imprimir_caracter
+INT 0
+end

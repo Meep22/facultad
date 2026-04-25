@@ -1,0 +1,49 @@
+PIO EQU 30h
+
+ORG 1000h
+FIN_PROGRAMA db "Fin de programa"
+MSG db "Arquitectura de Computadoras: ACTIVADA"
+fin_str db ?
+
+ORG 3000h
+init: MOV AL, 0
+OUT PIO + 3, AL
+MOV AL, 0FFh
+OUT PIO + 2, AL
+MOV AH, 0
+RET
+
+A: CMP AL, 0
+JNZ FIN
+MOV AH, 1
+MOV BX, offset FIN_PROGRAMA
+MOV AL, offset MSG - offset FIN_PROGRAMA
+INT 7
+FIN: RET
+
+B: MOV CL, AL
+NOT AL
+OUT PIO + 1, AL
+MOV AL, CL
+RET
+
+C: AND AL, 1
+JZ FIN
+MOV BX, offset MSG
+MOV AL, offset fin_str - offset MSG
+INT 7
+RET
+
+leer: IN AL, PIO
+CALL A
+CMP AH, 1
+JZ FIN
+CALL B
+CALL C
+JMP leer
+
+ORG 2000h
+CALL init
+CALL leer
+INT 0
+end

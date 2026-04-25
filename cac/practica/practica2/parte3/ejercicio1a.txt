@@ -1,0 +1,29 @@
+PIO EQU 30h
+ORG 1000h
+MSG db "UNLP"
+NULL db 0
+
+ORG 3000h
+ini_pio: MOV AL, 0
+OUT PIO + 3, AL
+RET
+
+envio: MOV AL, NULL
+OUT PIO + 1, AL
+MOV AL, [BX]
+OUT PIO + 1, AL
+INC BX
+DEC AH
+JNZ envio
+RET
+
+ORG 2000h
+MOV AH, 4
+MOV BX, offset MSG
+CALL ini_pio
+CALL envio
+MOV AL, 255
+OUT PIO + 1, AL
+INT 0
+end
+

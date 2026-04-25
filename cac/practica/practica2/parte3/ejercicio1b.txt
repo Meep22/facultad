@@ -1,0 +1,27 @@
+PA EQU 30h
+PB EQU 31h
+CA EQU 32h
+CB EQU 33h
+
+ORG 1000h
+MSG db "ASD"
+fin db 0
+
+ORG 3000h
+ini_pio: MOV AL, 0FFh
+OUT CA, AL
+MOV AL, 0
+OUT CB, AL
+
+leer: MOV AL, 0FFh
+OUT PB, AL
+IN AL, PA
+CMP AL, 0
+JNZ leer
+RET
+
+ORG 1000h
+CALL ini_pio
+CALL leer
+INT 0
+end

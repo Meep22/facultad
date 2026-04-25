@@ -1,0 +1,4 @@
+La principal diferencia entre el PIO y el HAND SHAKE es que el hand no necesita que se manipule el estado de la impresora
+de forma manual. Lo hace sola, recibe el estado de la impresora (busy) y cuando se le manda a un caracter para imprimir
+hace el puslso de strobe de forma autormatica. Por otro lado, el hand permite trabajar con interrupciones por software
+

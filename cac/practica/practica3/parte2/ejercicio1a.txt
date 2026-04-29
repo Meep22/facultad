@@ -1,0 +1,12 @@
+A.  ¿Qué hacen las instrucciones CLI y STI? ¿Qué podría suceder si no están las mismas y la persona que
+    usa el programa presiona F10 rápidamente durante la configuración del PIC?
+B.  ¿Por qué se usa el valor 0FEH en el programa?
+C.  ¿Qué instrucciones le indican al PIC que la interrupción ha terminado?
+D.  ¿En qué dirección se encuentra la subrutina que atiende las interrupciones del F10?
+
+A.  La instruccion CLI desactiva todas las interrupciones para poder configurarlas, hay un periodo de
+    tiempo en el que las instrucciones estan activas pero no configuradas.
+    STI reactiva las interrupciones.
+B.  Se usa el valor 0FEh en el IMR para que solo las interrupciones generadas por la tecla F10 sean atendidas
+C.  Se le indica al PIC que la interrupcion termino enviandole 20h a la linea EOI (20h de memoria)
+D.  La subrrutina de la interrupcion del F10 esta en la direccion 3000h

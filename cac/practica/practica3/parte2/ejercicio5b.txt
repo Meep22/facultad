@@ -1,0 +1,5 @@
+En caso de que la velocidad de impresion sea igual o mayor a la de ejecion de la subrutina de interrupcion
+conviene imprimir por consulta de estado. Las interrupciones son utiles siempre y cuando se pueda ejecutar codigo
+util en simultaneo. Si no le da tiempo al procesador de ejecutar codigo que no sea de la impresora, la consulta de
+estado lleva menos instrucciones para imprimir.
+
